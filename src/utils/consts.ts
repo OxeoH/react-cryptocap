@@ -1,0 +1,6 @@
+export const LOGIN_ROUTE = '/login'
+export const REGISTER_ROUTE = '/register'
+export const PROFILE_ROUTE = '/profile'
+export const DASHBOARD_ROUTE = '/'
+export const COIN_ROUTE = '/coin/:id'
+export const NOTFOUND_ROUTE = '*'
