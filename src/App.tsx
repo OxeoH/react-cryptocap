@@ -7,6 +7,7 @@ import { Header } from './components/Header'
 
 function App() {
   const { userStore } = useStore()
+
   return (
     <div className="App">
       <Header />
