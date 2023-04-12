@@ -9,10 +9,12 @@ export const CoinItem: React.FC<CoinType> = props => {
         {props.name} <span>{props.symbol}</span>
       </td>
       <td>${props.priceUsd}</td>
-      <td>{props.changePercent24Hr}</td>
-      <td>{props.marketCapUsd}</td>
-      <td>{props.volumeUsd24Hr}</td>
-      <td>{props.supply}</td>
+      <td>{Number.parseFloat(props.changePercent24Hr).toFixed(3)}%</td>
+      <td>${Number.parseFloat(props.marketCapUsd).toFixed(3)}</td>
+      <td>${Number.parseFloat(props.volumeUsd24Hr).toFixed(3)}</td>
+      <td>
+        {Number.parseFloat(props.supply).toFixed(3)} {props.symbol}
+      </td>
     </tr>
   )
 }

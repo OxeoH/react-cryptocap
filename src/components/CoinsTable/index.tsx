@@ -4,18 +4,26 @@ import { useStore } from '../../store'
 import { observer } from 'mobx-react'
 
 export const CoinTable = observer(() => {
-  const { coinsStore } = useStore()
+  const { coinsStore, sortsStore } = useStore()
 
   React.useEffect(() => {
-    coinsStore.updateCoinsData()
+    coinsStore.updateCoinsData(sortsStore.pageLimit, sortsStore.offset)
     const fetchInterval = setInterval(() => {
-      coinsStore.updateCoinsData()
-    }, 30000) //30s for dev
+      coinsStore.updateCoinsData(sortsStore.pageLimit, sortsStore.offset)
+    }, 3000) //30s for dev
 
     return () => {
       clearInterval(fetchInterval)
     }
-  }, [])
+  }, [sortsStore.page])
+
+  const nextPageHandleClick = () => {
+    sortsStore.nextPage()
+  }
+
+  const prevPageHandleClick = () => {
+    sortsStore.prevPage()
+  }
 
   return (
     <div>
@@ -26,7 +34,7 @@ export const CoinTable = observer(() => {
           <th>Price</th>
           <th>24h%</th>
           <th>Market Cap</th>
-          <th>${'Volume(24h)'}</th>
+          <th>{'Volume(24h)'}</th>
           <th>Circulating Supply</th>
         </thead>
         <tbody>
@@ -50,6 +58,8 @@ export const CoinTable = observer(() => {
             ))}
         </tbody>
       </table>
+      <button onClick={() => prevPageHandleClick()}>Back</button>
+      <button onClick={() => nextPageHandleClick()}>Next</button>
     </div>
   )
 })

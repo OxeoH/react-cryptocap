@@ -12,7 +12,7 @@ export default class CoinsStore {
     makeAutoObservable(this)
   }
 
-  async updateCoinsData() {
-    this.coins = await fetchCoinsDataFromApi()
+  async updateCoinsData(limit: number, offset: number) {
+    this.coins = await fetchCoinsDataFromApi(limit, offset)
   }
 }
