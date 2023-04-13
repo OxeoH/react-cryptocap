@@ -7,10 +7,10 @@ export const CoinTable = observer(() => {
   const { coinsStore, sortsStore } = useStore()
 
   React.useEffect(() => {
-    coinsStore.updateCoinsData(sortsStore.pageLimit, sortsStore.offset)
+    coinsStore.updateCoinsData()
     const fetchInterval = setInterval(() => {
-      coinsStore.updateCoinsData(sortsStore.pageLimit, sortsStore.offset)
-    }, 3000) //30s for dev
+      coinsStore.updateCoinsData()
+    }, 3000)
 
     return () => {
       clearInterval(fetchInterval)
@@ -38,8 +38,8 @@ export const CoinTable = observer(() => {
           <th>Circulating Supply</th>
         </thead>
         <tbody>
-          {!!coinsStore.coins.length &&
-            coinsStore.coins.map(coin => (
+          {!!coinsStore.filteredCoins.length &&
+            coinsStore.filteredCoins.map(coin => (
               <CoinItem
                 key={coin.id}
                 changePercent24Hr={coin.changePercent24Hr}

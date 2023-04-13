@@ -15,13 +15,20 @@ export default class SortsStore {
   }
 
   nextPage() {
+    if (this.offset === this.rootStore.coinsStore.coins.length - this.pageLimit) return
+
     this.page = this.page + 1
     this.offset = this.page * this.pageLimit
+
+    this.rootStore.coinsStore.filterCoinsByParams()
   }
 
   prevPage() {
     if (this.page === 0) return
+
     this.page = this.page - 1
     this.offset = this.page * this.pageLimit
+
+    this.rootStore.coinsStore.filterCoinsByParams()
   }
 }
